@@ -1,0 +1,203 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
+
+.homepage {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+  .homepage h1 {
+    height: 60vh;
+    color: rgba(0, 0, 0, 0.372);
+    line-height: 50vh; }
+  .homepage div {
+    display: flex;
+    flex-direction: column; }
+    .homepage div button {
+      color: white;
+      border: none;
+      background-color: rgba(0, 174, 255, 0.72);
+      font-size: 1.5rem;
+      padding: 0.5rem 2.5rem;
+      margin: 1rem 0rem 0rem 0rem; }
+
+.searchlist .search-nav {
+  height: 65px;
+  border-bottom: 1px solid black;
+  display: flex;
+  justify-content: space-around;
+  align-items: center; }
+  .searchlist .search-nav select {
+    color: rgba(0, 0, 0, 0.8);
+    height: 42px;
+    font-size: 1rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 15px; }
+  .searchlist .search-nav input {
+    height: 42px;
+    width: 40%;
+    color: rgba(0, 0, 0, 0.8);
+    font-size: 1rem;
+    padding: 0rem 1rem;
+    border-radius: 15px;
+    border: 1px solid rgba(0, 0, 0, 0.6);
+    text-align: center; }
+  .searchlist .search-nav button {
+    height: 42px;
+    color: white;
+    background-color: rgba(0, 174, 255, 0.72);
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 18px;
+    padding: 0.5rem 2.2rem; }
+
+.searchlist .update-time {
+  color: rgba(0, 0, 0, 0.5);
+  font-size: small;
+  text-align: end;
+  padding: 0rem 0.5rem; }
+
+.searchlist .list-area {
+  height: calc(100vh - 95px);
+  overflow: scroll; }
+  .searchlist .list-area .list {
+    margin: 1.2rem 0.8rem;
+    padding: 8px;
+    border: 2px solid rgba(0, 0, 0, 0.25); }
+    .searchlist .list-area .list .list-top {
+      display: flex;
+      margin-bottom: 5px;
+      position: relative; }
+      .searchlist .list-area .list .list-top .pharmacy-name {
+        color: rgba(0, 0, 0, 0.8);
+        font-size: small; }
+      .searchlist .list-area .list .list-top .pharmacy-phone {
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 9px;
+        line-height: 18px;
+        margin-left: 8px; }
+      .searchlist .list-area .list .list-top .sieve-count {
+        color: blue;
+        text-align: end;
+        position: absolute;
+        right: 0; }
+    .searchlist .list-area .list .pharmacy-address {
+      color: rgba(0, 0, 0, 0.8);
+      font-size: small;
+      margin-bottom: 5px; }
+      .searchlist .list-area .list .pharmacy-address img {
+        height: 14px;
+        width: 14px; }
+    .searchlist .list-area .list .sieve-label {
+      color: blue;
+      margin-bottom: 5px; }
+    .searchlist .list-area .list .ps {
+      color: rgba(0, 0, 0, 0.5);
+      font-size: 9px; }
+
+.searchlist .goto-btn {
+  border-radius: 50%;
+  background-color: white;
+  border: none;
+  position: fixed;
+  bottom: 10px;
+  right: 10px; }
+  .searchlist .goto-btn img {
+    background-color: white;
+    border-radius: 50%;
+    border: 1px solid black;
+    padding: 0.5rem 0.55rem 0.35rem 0.5rem; }
+
+.storecomponent {
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.303);
+  position: absolute;
+  top: 0;
+  z-index: 1; }
+  .storecomponent .store-view {
+    width: 80%;
+    background-color: white;
+    padding: 1rem 0rem;
+    position: absolute;
+    top: calc(100% / 2 - 10%);
+    left: calc(100% / 2 - 40%); }
+    .storecomponent .store-view h2 {
+      color: rgba(0, 0, 0, 0.6);
+      text-align: center; }
+    .storecomponent .store-view div {
+      display: flex;
+      justify-content: space-around; }
+      .storecomponent .store-view div button {
+        color: white;
+        width: 40%;
+        font-size: 1.2rem;
+        border: none;
+        background-color: rgba(0, 174, 255, 0.718);
+        padding: 0.5rem 2rem;
+        margin-top: 2rem; }
+
+.storepage {
+  height: 100vh;
+  padding: 1rem 5px; }
+  .storepage h1 {
+    height: 8vh;
+    line-height: 10vh;
+    color: rgba(0, 0, 0, 0.5);
+    text-align: center; }
+  .storepage .store-list {
+    height: 75vh;
+    overflow: scroll; }
+    .storepage .store-list .list {
+      margin: 1.2rem 0.8rem;
+      padding: 8px;
+      border: 2px solid rgba(0, 0, 0, 0.25);
+      overflow: hidden; }
+      .storepage .store-list .list .list-top {
+        display: flex;
+        margin-bottom: 5px;
+        position: relative; }
+        .storepage .store-list .list .list-top .pharmacy-name {
+          color: rgba(0, 0, 0, 0.8);
+          font-size: small; }
+        .storepage .store-list .list .list-top .pharmacy-phone {
+          color: rgba(0, 0, 0, 0.5);
+          font-size: 9px;
+          line-height: 18px;
+          margin-left: 8px; }
+        .storepage .store-list .list .list-top .sieve-count {
+          color: blue;
+          text-align: end;
+          position: absolute;
+          right: 0; }
+      .storepage .store-list .list .pharmacy-address {
+        color: rgba(0, 0, 0, 0.8);
+        font-size: small;
+        margin-bottom: 5px; }
+        .storepage .store-list .list .pharmacy-address img {
+          height: 14px;
+          width: 14px; }
+      .storepage .store-list .list .sieve-label {
+        color: blue;
+        margin-bottom: 5px; }
+      .storepage .store-list .list .ps {
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 9px; }
+  .storepage .store-button {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1rem; }
+    .storepage .store-button button {
+      width: 40%;
+      color: white;
+      font-size: 1.2rem;
+      border: none;
+      background-color: rgba(0, 174, 255, 0.718);
+      padding: 0.5rem 2rem; }
+
+.footer p {
+  margin-top: 1rem;
+  font-size: small; }

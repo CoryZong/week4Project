@@ -1,0 +1,276 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+//首頁
+.homepage {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  h1 {
+    height: 60vh;
+    color: rgba(0, 0, 0, 0.372);
+    line-height: 50vh;
+  }
+  div {
+    display: flex;
+    flex-direction: column;
+    button {
+      color: white;
+      border: none;
+      background-color: rgba(0, 174, 255, 0.72);
+      font-size: 1.5rem;
+      padding: 0.5rem 2.5rem;
+      margin: 1rem 0rem 0rem 0rem;
+    }
+  }
+}
+
+//開始使用頁面
+.searchlist {
+  .search-nav {
+    height: 65px;
+    border-bottom: 1px solid black;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    select {
+      color: rgba(0, 0, 0, 0.8);
+      height: 42px;
+      font-size: 1rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 15px;
+    }
+    input {
+      height: 42px;
+      width: 40%;
+      color: rgba(0, 0, 0, 0.8);
+      font-size: 1rem;
+      padding: 0rem 1rem;
+      border-radius: 15px;
+      border: 1px solid rgba(0, 0, 0, 0.6);
+      text-align: center;
+    }
+    button {
+      height: 42px;
+      color: white;
+      background-color: rgba(0, 174, 255, 0.72);
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 18px;
+      padding: 0.5rem 2.2rem;
+    }
+  }
+
+  .update-time {
+    color: rgba(0, 0, 0, 0.5);
+    font-size: small;
+    text-align: end;
+    padding: 0rem 0.5rem;
+  }
+
+  .list-area {
+    height: calc(100vh - 95px);
+    overflow: scroll;
+    .list {
+      margin: 1.2rem 0.8rem;
+      padding: 8px;
+      border: 2px solid rgba(0, 0, 0, 0.25);
+
+      .list-top {
+        display: flex;
+        margin-bottom: 5px;
+        position: relative;
+
+        .pharmacy-name {
+          color: rgba(0, 0, 0, 0.8);
+          font-size: small;
+        }
+
+        .pharmacy-phone {
+          color: rgba(0, 0, 0, 0.5);
+          font-size: 9px;
+          line-height: 18px;
+          margin-left: 8px;
+        }
+
+        .sieve-count {
+          color: blue;
+          text-align: end;
+          position: absolute;
+          right: 0;
+        }
+      }
+
+      .pharmacy-address {
+        color: rgba(0, 0, 0, 0.8);
+        font-size: small;
+        margin-bottom: 5px;
+        img {
+          height: 14px;
+          width: 14px;
+        }
+      }
+
+      .sieve-label {
+        color: blue;
+        margin-bottom: 5px;
+      }
+
+      .ps {
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 9px;
+      }
+    }
+  }
+
+  .goto-btn {
+    border-radius: 50%;
+
+    background-color: white;
+    border: none;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+
+    img {
+      background-color: white;
+      border-radius: 50%;
+      border: 1px solid black;
+      padding: 0.5rem 0.55rem 0.35rem 0.5rem;
+    }
+  }
+}
+
+//彈出視窗
+.storecomponent {
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.303);
+  position: absolute;
+  top: 0;
+  z-index: 1;
+
+  .store-view {
+    width: 80%;
+    background-color: white;
+    padding: 1rem 0rem;
+    position: absolute;
+    top: calc(100% / 2 - 10%);
+    left: calc(100% / 2 - 40%);
+
+    h2 {
+      color: rgba(0, 0, 0, 0.6);
+      text-align: center;
+    }
+
+    div {
+      display: flex;
+      justify-content: space-around;
+
+      button {
+        color: white;
+        width: 40%;
+        font-size: 1.2rem;
+        border: none;
+        background-color: rgba(0, 174, 255, 0.718);
+        padding: 0.5rem 2rem;
+        margin-top: 2rem;
+      }
+    }
+  }
+}
+
+//儲存機構頁面
+.storepage {
+  height: 100vh;
+  padding: 1rem 5px;
+  h1 {
+    height: 8vh;
+    line-height: 10vh;
+    color: rgba(0, 0, 0, 0.5);
+    text-align: center;
+  }
+
+  .store-list {
+    height: 75vh;
+    overflow: scroll;
+    .list {
+      margin: 1.2rem 0.8rem;
+      padding: 8px;
+      border: 2px solid rgba(0, 0, 0, 0.25);
+      overflow: hidden;
+
+      .list-top {
+        display: flex;
+        margin-bottom: 5px;
+        position: relative;
+
+        .pharmacy-name {
+          color: rgba(0, 0, 0, 0.8);
+          font-size: small;
+        }
+
+        .pharmacy-phone {
+          color: rgba(0, 0, 0, 0.5);
+          font-size: 9px;
+          line-height: 18px;
+          margin-left: 8px;
+        }
+
+        .sieve-count {
+          color: blue;
+          text-align: end;
+          position: absolute;
+          right: 0;
+        }
+      }
+
+      .pharmacy-address {
+        color: rgba(0, 0, 0, 0.8);
+        font-size: small;
+        margin-bottom: 5px;
+
+        img {
+          height: 14px;
+          width: 14px;
+        }
+      }
+
+      .sieve-label {
+        color: blue;
+        margin-bottom: 5px;
+      }
+
+      .ps {
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 9px;
+      }
+    }
+  }
+
+  .store-button {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1rem;
+    button {
+      width: 40%;
+      color: white;
+      font-size: 1.2rem;
+      border: none;
+      background-color: rgba(0, 174, 255, 0.718);
+      padding: 0.5rem 2rem;
+    }
+  }
+}
+
+.footer {
+  p {
+    margin-top: 1rem;
+    font-size: small;
+  }
+}
