@@ -3,6 +3,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { StoreComponent } from "../components/StoreComponent";
 import { useNavigate } from "react-router-dom";
 import Axios from "axios";
+import { useDispatch } from "react-redux";
+import { StoreLocalStorage, GetLocalStorage, ClearLocalStorage } from "../reduxSlice";
 
 export const SearchList = () => {
   const navigate = useNavigate();
@@ -17,6 +19,8 @@ export const SearchList = () => {
 
   const citySelecter = useRef();
   const cityName = CityAPI;
+
+  const dispatch = useDispatch();
 
   //csv to json
   function csvJSON(csv) {
@@ -113,12 +117,12 @@ export const SearchList = () => {
   }
 
   //localstorage
-  let mylist = localStorage.getItem("list");
+  let mylist = dispatch(GetLocalStorage());
 
   //判別重複資料
   function repeatHandler(data) {
     let flag = false;
-    let paeseData = JSON.parse(mylist);
+    let paeseData = JSON.parse(localStorage.getItem("list"));
     paeseData.forEach((e) => {
       if (e.醫事機構代碼 == data.醫事機構代碼) flag = true;
     });
@@ -127,20 +131,7 @@ export const SearchList = () => {
 
   //Yes => store list
   function YesHandler() {
-    if (mylist == null) {
-      localStorage.setItem("list", JSON.stringify([resultStore]));
-    } else if (repeatHandler(resultStore)) {
-      alert("該資料已在儲存機構內!");
-    } else {
-      let myListArray = JSON.parse(mylist); //變回object
-      if (myListArray.length > 9) {
-        myListArray.shift();
-        myListArray.push(resultStore);
-      } else {
-        myListArray.push(resultStore);
-      }
-      localStorage.setItem("list", JSON.stringify(myListArray));
-    }
+    dispatch(StoreLocalStorage({ store: resultStore, repeat: repeatHandler }));
     setLongTouchHandler((pre) => !pre);
   }
 

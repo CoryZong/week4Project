@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { Footer } from "../components/Footer";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { GetLocalStorage, ClearLocalStorage } from "../reduxSlice";
 
 export const StorePage = () => {
   const navigate = useNavigate();
   const [storeData, setStoreData] = useState([]);
+  const dispatch = useDispatch();
 
-  useEffect(() => setStoreData(JSON.parse(localStorage.getItem("list"))), []);
+  let mylist = dispatch(GetLocalStorage()).payload;
+  useEffect(() => setStoreData(JSON.parse(mylist)), []);
 
   function resetStoreData() {
-    localStorage.clear("list");
+    dispatch(ClearLocalStorage());
     setStoreData([]);
   }
 
