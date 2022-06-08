@@ -1,16 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+//判別重複資料
+function repeatHandler(data) {
+  let flag = false;
+  let paeseData = JSON.parse(localStorage.getItem("list"));
+  paeseData.forEach((e) => {
+    if (e.agencyNumber == data.agencyNumber) flag = true;
+  });
+  return flag;
+}
+
 export const reduxSlice = createSlice({
   name: "test",
-  initialState: {
-    value: 0,
-  },
+  initialState: {},
   reducers: {
     StoreLocalStorage: (state, actions) => {
-      let fun = actions.payload.repeat;
       if (localStorage.getItem("list") == null) {
         localStorage.setItem("list", JSON.stringify([actions.payload.store]));
-      } else if (fun(actions.payload.store)) {
+      } else if (repeatHandler(actions.payload.store)) {
         alert("該資料已在儲存機構內!");
       } else {
         let myListArray = JSON.parse(localStorage.getItem("list")); //變回object

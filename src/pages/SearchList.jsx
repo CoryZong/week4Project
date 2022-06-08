@@ -4,7 +4,7 @@ import { StoreComponent } from "../components/StoreComponent";
 import { useNavigate } from "react-router-dom";
 import Axios from "axios";
 import { useDispatch } from "react-redux";
-import { StoreLocalStorage, GetLocalStorage, ClearLocalStorage } from "../reduxSlice";
+import { StoreLocalStorage, GetLocalStorage } from "../reduxSlice";
 
 export const SearchList = () => {
   const navigate = useNavigate();
@@ -22,6 +22,18 @@ export const SearchList = () => {
 
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    getData();
+    const dater = new Date();
+    let year = dater.getFullYear(),
+      month = dater.getMonth() + 1,
+      date = dater.getDate(),
+      hour = dater.getHours(),
+      min = dater.getMinutes(),
+      second = dater.getSeconds();
+
+    setUpdateTime(`${year}/${month}/${date} ${hour}:${min}:${second}`);
+  }, []);
   //csv to json
   function csvJSON(csv) {
     var lines = csv.split("\r\n");
@@ -48,33 +60,39 @@ export const SearchList = () => {
     Axios.post("https://data.nhi.gov.tw/Datasets/Download.ashx?rid=A21030000I-D03001-001&l=https://data.nhi.gov.tw/resource/Nhi_Fst/Fstdata.csv")
       .then((res) => {
         let CSVdata = res.data;
-        var JSONdata = JSON.parse(csvJSON(CSVdata));
-        setList(JSONdata);
-        setDisplayList(JSONdata);
+        let JSONdata = JSON.parse(csvJSON(CSVdata));
+        let EngData = changeObjEng(JSONdata);
+        setList(EngData);
+        setDisplayList(EngData);
       })
       .catch((error) => console.log(error));
   }
 
-  useEffect(() => {
-    getData();
-    const dater = new Date();
-    let year = dater.getFullYear(),
-      month = dater.getMonth() + 1,
-      date = dater.getDate(),
-      hour = dater.getHours(),
-      min = dater.getMinutes(),
-      second = dater.getSeconds();
-
-    setUpdateTime(`${year}/${month}/${date} ${hour}:${min}:${second}`);
-  }, []);
+  //change Obj to Eng
+  function changeObjEng(objArr) {
+    let newObjArr = [];
+    objArr.forEach((e) => {
+      let newObj = {
+        agencyNumber: e.醫事機構代碼,
+        agencyName: e.醫事機構名稱,
+        agencyPhone: e.醫事機構電話,
+        agencyAddress: e.醫事機構地址,
+        sieveCount: e.快篩試劑截至目前結餘存貨數量,
+        sieveName: e.廠牌項目,
+        ps: e.備註,
+      };
+      newObjArr.push(newObj);
+    });
+    return newObjArr;
+  }
 
   //Select element to filter data
   function selectData() {
     let result = list.filter((e) => {
-      if (!e.醫事機構名稱) {
+      if (!e.agencyName) {
         return false;
       } else {
-        return e.醫事機構名稱.includes(citySelecter.current.value);
+        return e.agencyName.includes(citySelecter.current.value);
       }
     });
     setStoreList(result);
@@ -84,7 +102,7 @@ export const SearchList = () => {
   //Search button onclick
   function SerchData() {
     let result = storeList.filter((e) => {
-      return e.廠牌項目.includes(input) || e.醫事機構名稱.includes(input) || e.醫事機構地址.includes(input) || e.醫事機構代碼.includes(input);
+      return e.sieveName.includes(input) || e.agencyName.includes(input) || e.agencyAddress.includes(input) || e.agencyNumber.includes(input);
     });
     result.length == 0 ? alert("查無相關資料，請重新輸入關鍵字!") : setDisplayList(result);
   }
@@ -119,19 +137,9 @@ export const SearchList = () => {
   //localstorage
   let mylist = dispatch(GetLocalStorage());
 
-  //判別重複資料
-  function repeatHandler(data) {
-    let flag = false;
-    let paeseData = JSON.parse(localStorage.getItem("list"));
-    paeseData.forEach((e) => {
-      if (e.醫事機構代碼 == data.醫事機構代碼) flag = true;
-    });
-    return flag;
-  }
-
   //Yes => store list
   function YesHandler() {
-    dispatch(StoreLocalStorage({ store: resultStore, repeat: repeatHandler }));
+    dispatch(StoreLocalStorage({ store: resultStore }));
     setLongTouchHandler((pre) => !pre);
   }
 
@@ -161,18 +169,18 @@ export const SearchList = () => {
             index < load && (
               <div key={index} id={index} className="list" onTouchStart={(e) => touchStart(e)} onTouchEnd={touchEnd}>
                 <div className="list-top">
-                  <p className="pharmacy-name">{e.醫事機構名稱}</p>
-                  <p className="pharmacy-phone">({e.醫事機構電話})</p>
-                  <div className="sieve-count">{e.快篩試劑截至目前結餘存貨數量}</div>
+                  <p className="pharmacy-name">{e.agencyName}</p>
+                  <p className="pharmacy-phone">({e.agencyPhone})</p>
+                  <div className="sieve-count">{e.sieveCount}</div>
                 </div>
                 <p className="pharmacy-address">
-                  {e.醫事機構地址}
-                  <a href={`http://maps.google.com/?q=${e.醫事機構名稱}`}>
+                  {e.agencyAddress}
+                  <a href={`http://maps.google.com/?q=${e.agencyName}`}>
                     <img src="../../icons/icon.png" />
                   </a>
                 </p>
-                <p className="sieve-label">{e.廠牌項目}</p>
-                <p className="ps">{e.備註}</p>
+                <p className="sieve-label">{e.sieveName}</p>
+                <p className="ps">{e.ps}</p>
               </div>
             )
           );

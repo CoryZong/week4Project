@@ -26,18 +26,18 @@ export const StorePage = () => {
               return (
                 <div key={index} id={index} className="list">
                   <div className="list-top">
-                    <p className="pharmacy-name">{e.醫事機構名稱}</p>
-                    <p className="pharmacy-phone">({e.醫事機構電話})</p>
-                    <div className="sieve-count">{e.快篩試劑截至目前結餘存貨數量}</div>
+                    <p className="pharmacy-name">{e.agencyName}</p>
+                    <p className="pharmacy-phone">({e.agencyPhone})</p>
+                    <div className="sieve-count">{e.sieveCount}</div>
                   </div>
                   <p className="pharmacy-address">
-                    {e.醫事機構地址}
-                    <a href={`http://maps.google.com/?q=${e.醫事機構名稱}`}>
+                    {e.agencyAddress}
+                    <a href={`http://maps.google.com/?q=${e.agencyName}`}>
                       <img src="../../icons/icon.png" />
                     </a>{" "}
                   </p>
-                  <p className="sieve-label">{e.廠牌項目}</p>
-                  <p className="ps">{e.備註}</p>
+                  <p className="sieve-label">{e.sieveName}</p>
+                  <p className="ps">{e.ps}</p>
                 </div>
               );
             })
