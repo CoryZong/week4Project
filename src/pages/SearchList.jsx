@@ -7,6 +7,8 @@ import { useDispatch } from "react-redux";
 import { StoreLocalStorage, GetLocalStorage } from "../reduxSlice";
 
 export const SearchList = () => {
+  const cityName = CityAPI;
+
   const navigate = useNavigate();
 
   const [updataTime, setUpdateTime] = useState("");
@@ -18,7 +20,6 @@ export const SearchList = () => {
   const [load, setLoad] = useState(10);
 
   const citySelecter = useRef();
-  const cityName = CityAPI;
 
   const dispatch = useDispatch();
 
@@ -34,6 +35,7 @@ export const SearchList = () => {
 
     setUpdateTime(`${year}/${month}/${date} ${hour}:${min}:${second}`);
   }, []);
+
   //csv to json
   function csvJSON(csv) {
     var lines = csv.split("\r\n");
@@ -127,16 +129,6 @@ export const SearchList = () => {
     clearInterval(lonhTouchFlag);
   }
 
-  //下拉加載更多
-  function scrollHandler(e) {
-    if (e.target.clientHeight + e.target.scrollTop >= e.target.scrollHeight) {
-      setLoad((pre) => pre + 10);
-    }
-  }
-
-  //localstorage
-  let mylist = dispatch(GetLocalStorage());
-
   //Yes => store list
   function YesHandler() {
     dispatch(StoreLocalStorage({ store: resultStore }));
@@ -148,6 +140,12 @@ export const SearchList = () => {
     setLongTouchHandler((pre) => !pre);
   }
 
+  //下拉加載更多
+  function scrollHandler(e) {
+    if (e.target.clientHeight + e.target.scrollTop >= e.target.scrollHeight) {
+      setLoad((pre) => pre + 10);
+    }
+  }
   return (
     <div className="searchlist">
       <div className="search-nav">
